@@ -20,7 +20,10 @@ class Client extends Table {
 
     public function select($cols = false, $join = false, $where = false): string {
         $columns = $cols ?: $this->columns; // false/null/empty → use $this->columns
-        return parent::select(false, $join, $where);
+        return parent::select($cols, $join, $where);
+    }
+    public function insert($cols=false, $values=false) {
+      return parent::insert($cols, $values);
     }
 }
 ?>

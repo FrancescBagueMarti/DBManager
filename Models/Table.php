@@ -52,6 +52,7 @@ class Table {
             }
         }
 
+        /*
         if ($where != false) {
             $i = 0;
             while ($i < count($where)) {
@@ -65,10 +66,27 @@ class Table {
                 $i++;
             }
         }
-
+        */
         return $query;
     }
 
-    // protected function insert
+    protected function insert($cols=false, $values=false) {
+      $query = "";
+      if (count($cols) == 0) {
+        return ["result"=>"KO", "message"=>"No se han pasado columnas al insert"];
+      }
+      if ($cols != false) {
+        $query.="INSERT (".implode(", ",$cols).") INTO ".$this->tableName;
+      } else {
+        $query.="INSERT (".implode(", ",$this->columns).") INTO ".$this->tableName;
+      }
+      
+      return $query;
+      
+      if ($values == false || count($values) == 0) {
+        return ["result" => "KO", "message" => "No se han pasado valores al insert"];
+      }
+      
+    }
 }
 ?>

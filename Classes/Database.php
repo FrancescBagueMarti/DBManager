@@ -29,4 +29,8 @@ class Database {
 
       return $stmt->fetchAll();
     }
+    public function insert($query) {
+      $conn = $this->getConnection();
+      $conn->exec($query);
+    }
 }
