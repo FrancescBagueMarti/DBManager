@@ -25,7 +25,7 @@ class Table {
         })($tableName, $columns);
     }
     /**
-     * @param array $cols array that contains the names of the columns
+     * @param array $cols array that contains the names of the columns  ex: ['name', 'age', 'COUNT(id)']
      * @param array $join array that contains the join strings          ex: ['JOIN pets ON pets.ownerId = person.id', 'JOIN cars ON cars.ownerId = person.id']
      * @param array $where Array that contains the where strings        ex: ['person.gender = "male"', 'cars.color = "red"']
      */
@@ -61,21 +61,21 @@ class Table {
             }
         }
 
-        /*
+        // checks if there is a $where array
         if ($where != false) {
-            $i = 0;
-            while ($i < count($where)) {
-                if ($i == 0) {
-                    $query .= " WHERE ";
-                } else {
-                    $query .= " AND ";
+            // Checks if $where is empty
+            if (empty($where)) {
+                $query .= " WHERE ";
+                foreach($where as $index => $clause) {
+                    // Only adds the 'AND' KEYWORD when it is not the first where clause
+                    if ($index != 0) {
+                        $query .= " AND ";
+                    }
+                    $query .= " ".$clause." ";
                 }
-
-                $query .= $where[$i];
-                $i++;
             }
         }
-        */
+        
         return $query;
     }
 

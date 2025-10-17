@@ -39,8 +39,6 @@ class Database {
     }
     
     public function select($query) {
-        //   echo $query;
-        //   return;
         $conn = $this->getConnection();
         $stmt = $conn->prepare($query);
         $stmt->execute();
